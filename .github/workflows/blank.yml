@@ -15,7 +15,7 @@ jobs:
 
       - name: Create package
         run: |
-          cp <<- EOF > package.json
+          cat <<- EOF > package.json
           {
             "name": "@${{ github.repository }}",
             "version": "1.0.0-g${{ github.sha }}",
