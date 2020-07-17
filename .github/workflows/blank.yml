@@ -10,6 +10,7 @@ jobs:
         include:
           - name: "@${{ github.repository }}"
           - version: "1.0.0-g${{ github.sha }}"
+          - repository_url: "${{ github.server_url }}/${{ github.repository }}"
       fail-fast: false
 
     runs-on: ubuntu-latest
@@ -26,7 +27,7 @@ jobs:
           {
             "name": "${{ matrix.name }}",
             "version": "${{ matrix.version }}",
-            "repository": "${{ github.server_url }}/${{ github.repository }}"
+            "repository": "${{ github.repository_url }}"
           }
           EOF
 
