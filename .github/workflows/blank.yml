@@ -9,6 +9,7 @@ jobs:
         npmrc:
           - "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
           - "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com"
+          - "registry=https://npm.pkg.github.com"
         include:
           - name: "@${{ github.repository }}"
           - repository_url: "${{ github.server_url }}/${{ github.repository }}"
