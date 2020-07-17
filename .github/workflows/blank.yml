@@ -27,7 +27,7 @@ jobs:
           {
             "name": "${{ matrix.name }}",
             "version": "${{ matrix.version }}",
-            "repository": "${{ github.repository_url }}"
+            "repository": "${{ matrix.repository_url }}"
           }
           EOF
 
