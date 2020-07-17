@@ -42,3 +42,9 @@ jobs:
 
       - name: Install package
         run: npm install ${{ matrix.name }}@${{ matrix.version }}
+
+      - name: Install unscoped package from npm
+        run: npm install path@0.12.7
+
+      - name: Install scoped package from npm
+        run: npm install @npm/types@1.0.0
