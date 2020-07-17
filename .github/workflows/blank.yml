@@ -27,3 +27,11 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove package
+        run: rm package.json
+
+      - name: Install package
+        run: npm install @${{ github.repository }}@1.0.0-g${{ github.sha }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
