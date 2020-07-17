@@ -60,7 +60,7 @@ jobs:
         run: npm install @npm/types@1.0.0
 
       - name: Clean up
-        run: rm *
+        run: rm -R *
 
       - name: Add local .yarnrc file
         run: echo "${{ env.yarnrc }}" > .npmrc
