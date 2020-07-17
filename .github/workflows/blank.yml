@@ -12,6 +12,7 @@ jobs:
         registry_url:
           - "https://npm.pkg.github.com"
           - "https://npm.pkg.github.com/${{ github.repository_owner }}"
+          - "https://npm.pkg.github.com/${{ github.repository_owner }}/"
           - "https://npm.pkg.github.com/@${{ github.repository_owner }}"
       fail-fast: false
 
