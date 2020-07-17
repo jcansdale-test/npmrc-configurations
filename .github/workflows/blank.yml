@@ -8,6 +8,7 @@ jobs:
       matrix:
         npmrc: ["registry=https://npm.pkg.github.com/${{ github.repository_owner }}"]
         include:
+          - name: "@${{ github.repository }}"
           - version: "1.0.0-g${{ github.sha }}"
       fail-fast: false
 
@@ -23,7 +24,7 @@ jobs:
         run: |
           cat <<- EOF > package.json
           {
-            "name": "@${{ github.repository }}",
+            "name": "${{ matrix.name }}",
             "version": "${{ matrix.version }}",
             "repository": "${{ github.server_url }}/${{ github.repository }}"
           }
