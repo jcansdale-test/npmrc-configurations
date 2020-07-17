@@ -56,7 +56,7 @@ jobs:
         run: npm init -y
         if: ${{ always() }}
 
-      - name: Install package
+      - name: Install package from GitHub
         run: npm install ${{ matrix.name }}@${{ env.version }}
         if: ${{ always() }}
 
