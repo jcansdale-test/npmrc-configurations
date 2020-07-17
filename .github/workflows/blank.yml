@@ -3,8 +3,18 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo Hello, world!
+      - name: Authenticate to GitHub Packages
+        run: echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' > ~/.npmrc
+
+      - name: Add local .npmrc file
+        run: echo "registry=https://npm.pkg.github.com/${{ github.repository_owner }}" > .npmrc
+
+      - name: Create package
+        run: npm init -y
+
+      - name: Publish package
+        run: npm publish
