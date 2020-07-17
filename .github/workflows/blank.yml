@@ -7,6 +7,7 @@ jobs:
     strategy:
       matrix:
         npmrc:
+          - "registry=https://npm.pkg.github.com"
           - "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
         include:
           - name: "@${{ github.repository }}"
