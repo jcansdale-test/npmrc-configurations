@@ -63,7 +63,7 @@ jobs:
         run: rm -R *
 
       - name: Add local .yarnrc file
-        run: echo "${{ env.yarnrc }}" > .npmrc
+        run: echo "${{ env.yarnrc }}" > .yarnrc
 
       - name: Add package using Yarn
         run: yarn add ${{ matrix.name }}@${{ env.version }}
