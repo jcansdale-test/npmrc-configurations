@@ -6,16 +6,14 @@ jobs:
   publish:
     strategy:
       matrix:
-        number: [0]
+        npmrc: "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
         include:
-          - npmrc: "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
           - name: "@${{ github.repository }}"
-          - version: "1.0.0-g${{ github.sha }}"
           - repository_url: "${{ github.server_url }}/${{ github.repository }}"
       fail-fast: false
 
     env:
-      version: "${{ matrix.version }}-${{ matrix.number }}"
+      version: "1.0.0-g${{ github.sha }}-${{ github.job }}"
 
     runs-on: ubuntu-latest
     steps:
