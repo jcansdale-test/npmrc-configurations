@@ -59,10 +59,11 @@ jobs:
       - name: Install scoped package from npm
         run: npm install @npm/types@1.0.0
 
+      - name: Clean up
+        run: rm *
+
       - name: Add local .yarnrc file
         run: echo "${{ env.yarnrc }}" > .npmrc
 
       - name: Add package using Yarn
-        run: |
-          rm package-lock.json
-          yarn add ${{ matrix.name }}@${{ env.version }} --registry ${{ matrix.registry_url }}
+        run: yarn add ${{ matrix.name }}@${{ env.version }} --registry ${{ matrix.registry_url }}
