@@ -6,12 +6,11 @@ jobs:
   publish:
     strategy:
       matrix:
-        npmrc:
-          - "registry=https://npm.pkg.github.com"
-          - "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
+        number: [0]
         include:
+          - npmrc: "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
           - name: "@${{ github.repository }}"
-          - version: "1.0.0-g${{ github.sha }}"
+          - version: "1.0.0-g${{ github.sha }}-${{ matrix.number }}"
           - repository_url: "${{ github.server_url }}/${{ github.repository }}"
       fail-fast: false
 
