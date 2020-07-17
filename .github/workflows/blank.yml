@@ -10,7 +10,7 @@ jobs:
         include:
           - npmrc: "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
           - name: "@${{ github.repository }}"
-          - version: "1.0.0-g${{ github.sha }}-${{ matrix.number }}"
+          - version: "1.0.0-g${{ github.sha }}-${{ github.job }}"
           - repository_url: "${{ github.server_url }}/${{ github.repository }}"
       fail-fast: false
 
