@@ -65,4 +65,4 @@ jobs:
       - name: Add package using Yarn
         run: |
           rm package-lock.json
-          yarn add ${{ matrix.name }}@${{ env.version }}
+          yarn add ${{ matrix.name }}@${{ env.version }} --registry ${{ matrix.registry_url }}
