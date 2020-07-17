@@ -19,8 +19,7 @@ jobs:
           {
             "name": "@${{ github.repository }}",
             "version": "1.0.0-g${{ github.sha }}",
-            "repository": "${{ github.server_url }}/${{ github.repository }}",
-            "description": ""
+            "repository": "${{ github.server_url }}/${{ github.repository }}"
           }
           EOF
 
@@ -29,6 +28,9 @@ jobs:
 
       - name: Remove package
         run: rm package.json
+
+      - name: Create empty package
+        run: npm init -y
 
       - name: Install package
         run: npm install @${{ github.repository }}@1.0.0-g${{ github.sha }}
