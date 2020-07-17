@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
 
     env:
-      version: "1.0.0-g${{ github.sha }}-${{ github.job.container.id }}"
+      version: "1.0.0-g${{ github.sha }}-${{ strategy.job-index }}"
 
     runs-on: ubuntu-latest
     steps:
