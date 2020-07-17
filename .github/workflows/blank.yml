@@ -21,6 +21,7 @@ jobs:
     env:
       version: "1.0.0-g${{ github.sha }}-${{ strategy.job-index }}"
       npmrc: "${{ matrix.registry }}=${{ matrix.registry_url }}"
+      yarnrc: "\"${{ matrix.registry }}\" \"${{ matrix.registry_url }}\""
 
     runs-on: ubuntu-latest
     steps:
@@ -57,3 +58,9 @@ jobs:
 
       - name: Install scoped package from npm
         run: npm install @npm/types@1.0.0
+
+      - name: Add local .yarnrc file
+        run: echo "${{ env.yarnrc }}" > .npmrc
+
+      - name: Add package using Yarn
+        run: yarn add ${{ matrix.name }}@${{ env.version }}
