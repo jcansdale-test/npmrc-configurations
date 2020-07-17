@@ -10,9 +10,12 @@ jobs:
         include:
           - npmrc: "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
           - name: "@${{ github.repository }}"
-          - version: "1.0.0-g${{ github.sha }}-${{ github.job }}"
+          - version: "1.0.0-g${{ github.sha }}"
           - repository_url: "${{ github.server_url }}/${{ github.repository }}"
       fail-fast: false
+
+    env:
+      version: "${{ matrix.version }}-${{ matrix.number }}"
 
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +30,7 @@ jobs:
           cat <<- EOF > package.json
           {
             "name": "${{ matrix.name }}",
-            "version": "${{ matrix.version }}",
+            "version": "${{ env.version }}",
             "repository": "${{ matrix.repository_url }}"
           }
           EOF
@@ -42,7 +45,7 @@ jobs:
         run: npm init -y
 
       - name: Install package
-        run: npm install ${{ matrix.name }}@${{ matrix.version }}
+        run: npm install ${{ matrix.name }}@${{ env.version }}
 
       - name: Install unscoped package from npm
         run: npm install path@0.12.7
