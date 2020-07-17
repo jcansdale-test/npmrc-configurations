@@ -43,6 +43,7 @@ jobs:
 
       - name: Publish package
         run: npm publish
+        continue-on-error: true
 
       - name: Remove package
         run: rm package.json
@@ -52,12 +53,15 @@ jobs:
 
       - name: Install package
         run: npm install ${{ matrix.name }}@${{ env.version }}
+        continue-on-error: true
 
       - name: Install unscoped package from npm
         run: npm install path@0.12.7
+        continue-on-error: true
 
       - name: Install scoped package from npm
         run: npm install @npm/types@1.0.0
+        continue-on-error: true
 
       - name: Clean up
         run: rm -R *
@@ -67,3 +71,4 @@ jobs:
 
       - name: Add package using Yarn
         run: yarn add ${{ matrix.name }}@${{ env.version }}
+        continue-on-error: true
