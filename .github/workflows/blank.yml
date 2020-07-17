@@ -6,11 +6,13 @@ jobs:
   publish:
     strategy:
       matrix:
-        npmrc:
-          - "registry=https://npm.pkg.github.com/${{ github.repository_owner }}"
-          - "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com"
-          - "registry=https://npm.pkg.github.com"
-          - "registry=https://npm.pkg.github.com/@${{ github.repository_owner }}"
+        registry:
+          - "registry"
+          - "@${{ github.repository_owner }}:registry"
+        registry_url:
+          - "https://npm.pkg.github.com"
+          - "https://npm.pkg.github.com/${{ github.repository_owner }}"
+          - "https://npm.pkg.github.com/@${{ github.repository_owner }}"
         include:
           - name: "@${{ github.repository }}"
           - repository_url: "${{ github.server_url }}/${{ github.repository }}"
@@ -18,6 +20,7 @@ jobs:
 
     env:
       version: "1.0.0-g${{ github.sha }}-${{ strategy.job-index }}"
+      npmrc: "${{ matrix.registry }}=${{ matrix.registry_url }}"
 
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +28,7 @@ jobs:
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
       - name: Add local .npmrc file
-        run: echo "${{ matrix.npmrc }}" > .npmrc
+        run: echo "${{ env.npmrc }}" > .npmrc
 
       - name: Create package
         run: |
