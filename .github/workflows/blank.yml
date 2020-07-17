@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Authenticate to GitHub Packages
-        run: echo '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > ~/.npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
       - name: Add local .npmrc file
         run: echo "registry=https://npm.pkg.github.com/${{ github.repository_owner }}" > .npmrc
@@ -25,13 +25,9 @@ jobs:
 
       - name: Publish package
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Remove package
         run: rm package.json
 
       - name: Install package
         run: npm install @${{ github.repository }}@1.0.0-g${{ github.sha }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
