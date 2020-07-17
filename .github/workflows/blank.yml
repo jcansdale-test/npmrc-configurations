@@ -14,7 +14,14 @@ jobs:
         run: echo "registry=https://npm.pkg.github.com/${{ github.repository_owner }}" > .npmrc
 
       - name: Create package
-        run: npm init -y
+        run: |
+          cat <<- EOF > package.json
+          {
+            "name": "@${{ github.repository }}",
+            "version": "1.0.0-g${{ github.sha }}",
+            "repository": "${{ github.server_url }}/${{ github.repository }}"
+          }
+          EOF
 
       - name: Publish package
         run: npm publish
