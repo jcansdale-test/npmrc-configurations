@@ -27,9 +27,11 @@ jobs:
     steps:
       - name: Authenticate to GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        if: ${{ always() }}
 
       - name: Add local .npmrc file
         run: echo "${{ env.npmrc }}" > .npmrc
+        if: ${{ always() }}
 
       - name: Create package
         run: |
@@ -40,6 +42,7 @@ jobs:
             "repository": "${{ matrix.repository_url }}"
           }
           EOF
+        if: ${{ always() }}
 
       - name: Publish package
         run: npm publish
@@ -47,9 +50,11 @@ jobs:
 
       - name: Remove package
         run: rm package.json
+        if: ${{ always() }}
 
       - name: Create empty package
         run: npm init -y
+        if: ${{ always() }}
 
       - name: Install package
         run: npm install ${{ matrix.name }}@${{ env.version }}
@@ -65,9 +70,11 @@ jobs:
 
       - name: Clean up
         run: rm -R *
+        if: ${{ always() }}
 
       - name: Add local .yarnrc file
         run: echo '${{ env.yarnrc }}' > .yarnrc
+        if: ${{ always() }}
 
       - name: Add package using Yarn
         run: yarn add ${{ matrix.name }}@${{ env.version }}
