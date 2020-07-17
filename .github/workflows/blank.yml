@@ -4,14 +4,18 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        npmrc: ["registry=https://npm.pkg.github.com/${{ github.repository_owner }}"]
+      fail-fast: false
 
+    runs-on: ubuntu-latest
     steps:
       - name: Authenticate to GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
       - name: Add local .npmrc file
-        run: echo "registry=https://npm.pkg.github.com/${{ github.repository_owner }}" > .npmrc
+        run: echo "${{ matrix.npmrc }}" > .npmrc
 
       - name: Create package
         run: |
