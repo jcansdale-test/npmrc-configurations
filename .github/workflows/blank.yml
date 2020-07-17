@@ -63,4 +63,6 @@ jobs:
         run: echo "${{ env.yarnrc }}" > .npmrc
 
       - name: Add package using Yarn
-        run: yarn add ${{ matrix.name }}@${{ env.version }}
+        run: |
+          rm package-lock.json
+          yarn add ${{ matrix.name }}@${{ env.version }}
