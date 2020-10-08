@@ -74,7 +74,7 @@ jobs:
       - name: Add local .yarnrc file
         run: |
           echo '${{ env.yarnrc }}' > .yarnrc
-          echo .yarnrc
+          cat .yarnrc
         if: ${{ always() }}
 
       - name: Add package using Yarn
